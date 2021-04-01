@@ -1,0 +1,28 @@
+<%= content_for(:page_title, 'Edit Price Based Shipping Rate') %>
+<div class="row">
+  <div class="col-md-7 mx-auto">
+    <div class="card p-4 mb-5">
+      <div class="title-light title-sm mb-4">Edit: <%= @price_shipping_rate.name %></div>
+      <%= simple_form_for [:admin, :settings, @price_shipping_rate], validate: true do |f| %>
+        <%= f.input :name, placeholder: "Standard shipping" %>
+        <div class="border-top border-bottom py-3 mb-3 mt-4">
+          <p class="mb-1 title-light text-info">Rate Range</p>
+          <div class="row">
+            <div class="col-md-6">
+              <%= f.input :min_order_price, placeholder: "0.00" %>
+            </div>
+            <div class="col-md-6">
+              <%= f.input :max_order_price, placeholder: "No limit" %>
+            </div>
+          </div>
+        </div>
+        <%= f.input :free_shipping, label: "Free shipping rate" %>
+        <%= f.input :rate_amount %>
+        <div class="mt-5 mb-3" >
+        <%= f.button :submit, "Update", class: "btn btn-primary px-5 mr-3" %>
+        <%= link_to "Cancel", admin_settings_shipping_path, class: "btn btn-secondary px-5"%>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  listing: one
+  cart: one
+  is_listing: false
+  link: MyText
+  details: MyText
+  quantity: 1
+
+two:
+  listing: two
+  cart: two
+  is_listing: false
+  link: MyText
+  details: MyText
+  quantity: 1

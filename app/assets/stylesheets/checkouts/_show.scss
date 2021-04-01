@@ -1,0 +1,20 @@
+.checkouts-show {
+  background: #f7f7f7;
+  #line-items-header {
+    border-bottom: 1px solid #f3f3f3;
+    padding-bottom: 16px;
+    margin-bottom: 20px;
+  }
+  .checkout-line-item {
+    border-bottom: 1px dotted #f3f3f3;
+    padding: 20px 0;
+    &:last-of-type {
+      border-bottom: 0;
+    }
+  }
+
+  #checkout-line-items {
+    background: #fff;
+    border-radius: 3px;
+  }
+}

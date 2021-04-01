@@ -1,0 +1,30 @@
+<div class="row mb-5">
+  <div class="col-md-7 mx-auto">
+    <div class="custom-card rounded p-4">
+      <div class="title title-sm mb-4">General Settings</div>
+      <%= form_for(Setting.new, url: admin_settings_general_path) do |f| %>
+        <div class="form-group">
+          <label class="control-label">Business Name</label>
+          <%= f.text_field :business_name, value: GeneralSetting.business_name, class: "form-control"  %>
+        </div>
+        <div class="form-group">
+          <label class="control-label">Contact Email</label>
+          <%= f.text_field :contact_email, value: GeneralSetting.contact_email, class: "form-control"  %>
+        </div>
+        <div class="form-group">
+          <label class="control-label">Phone</label>
+          <%= f.text_field :phone, value: GeneralSetting.phone, class: "form-control"  %>
+        </div>
+        <div class="form-group">
+          <label class="control-label">Street</label>
+          <%= f.text_field :street, value: GeneralSetting.street, class: "form-control"  %>
+        </div>
+        <div class="form-group">
+          <label class="control-label">City</label>
+          <%= f.text_field :city, value: GeneralSetting.city, class: "form-control" %>
+        </div>
+        <%= f.submit "Update", class: "btn btn-primary mt-3 px-5" %>
+      <% end %>
+    </div>
+  </div>
+</div>

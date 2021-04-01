@@ -1,0 +1,30 @@
+<div class="container mt-5">
+    <div class="row">
+      <div class="col-md-12 text-right">
+        <% if @cart.line_items.any? %>
+          Est. Total
+          <span class="title pr-2"><%= humanized_money_with_symbol(@cart.estimated_total) %> BZD</span>
+          <%= link_to new_checkout_path, class: "btn btn-primary px-5 py-2" do %>
+              <i class="fa fa-shopping-cart mr-2"></i> Continue To Checkout
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<div class="container my-5">
+  <% unless @cart.line_items.any? %>
+    <div class="col-md-6 bg-white mx-auto">
+      <h3 class="text-center mt-5 p-5">
+        <p class="title-light">It's lonely in here...</p>
+        <%= link_to shop_path, class: "btn btn-success btn-md px-4" do%>
+        <i class="fa fa-shopping-cart mr-2"></i> Go to shop
+        <% end %>
+      </h3>
+    </div>
+  <% end %>
+  <% if @cart.line_items.any? %>
+    <div id="cart-line-items">
+      <%= render 'line_items' %>
+    </div>
+  <% end %>
+</div>

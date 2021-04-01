@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 mx-auto">
+      <% if params[:checkout_complete].present? %>
+        <div id="checkout-complete" class="mt-3">
+          <div class="title-md title-md">Thanks for submitting your order</div>
+          <p>To finalize your order please complete the following</p>
+        </div>
+      <% end %>
+      <div class="row my-5">
+        <div class="col-md-12">
+          <div class="bg-primary-alt text-white p-3">
+            <h2 class="m-0">
+              <i class="fas fa-money-check-alt mr-2" style="font-size: 26px"></i>Payment Steps
+            </h2>
+            <p class="m-0" style="font-size: 18px">Note: You should complete the following steps only after receiving your invoice.</p>
+          </div>
+          <div class="pt-5">
+            <h4 class="mb-2">1. Initial Deposit</h4>
+            <p>To confirm and process your order we require an initial deposit of <%= RateSetting.initial_deposit %>% of the overall total to be made.
+              You'll be able to find the initial deposit that you need to make in your invoice.
+              You can deposit the funds to either of the following bank accounts:
+            </p>
+            <table class="table mt-5">
+              <tr class="bg-light">
+                <th>Bank</th>
+                <th>Account Name</th>
+                <th>Account Number</th>
+              </tr>
+              <% if BankSetting.atlantic_bank.present? %>
+                <tr>
+                  <td>Atlantic Bank</td>
+                  <td><%= BankSetting.atlantic_bank_account_name %></td>
+                  <td><%= BankSetting.atlantic_bank %></td>
+                </tr>
+              <% end %>
+              <% if BankSetting.belize_bank.present? %>
+                <tr>
+                  <td>Belize Bank</td>
+                  <td><%= BankSetting.belize_bank_account_name %></td>
+                  <td><%= BankSetting.belize_bank %></td>
+                </tr>
+              <% end %>
+              <% if BankSetting.scotia_bank.present? %>
+                <tr>
+                  <td>Scotia Bank</td>
+                  <td><%= BankSetting.scotia_bank_account_name %></td>
+                  <td><%= BankSetting.scotia_bank %></td>
+                </tr>
+              <% end %>
+              <% if BankSetting.heritage_bank.present? %>
+                <tr>
+                  <td>Heritage Bank</td>
+                  <td><%= BankSetting.heritage_bank_account_name %></td>
+                  <td><%= BankSetting.heritage_bank %></td>
+                </tr>
+              <% end %>
+            </table>
+          </div>
+          <div class="mt-5">
+            <h4 class="mb-2">2. Deposit Confirmation</h4>
+            <p>After you've made the initial deposit, you'll need to send us a picture of the deposit slip at which point we 
+              will move forth with confirming and processing your order.</p>
+            <p>You can forward us a picture of the deposit slip to <i class="fas fa-envelope text-primary" style="vertical-align: middle;"></i> payments@rapidboxing.com. Be sure to include the order tracking number in the body of the email.</p>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

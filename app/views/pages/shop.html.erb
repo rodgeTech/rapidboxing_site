@@ -1,0 +1,48 @@
+<%= content_for(:page_title, 'Featured') %>
+<section id="shop-cta-banner">
+  <div class="banner-content">
+    <div class="banner-header pt-5">
+      <div class="title title-md text-white">
+        <span class="border-bottom border-primary border-sm pb-2">Shop With Us Today</span>
+      </div>
+    </div>
+    <div class="banner-body">
+      <p class="lead text-white">Browse through or catalog of handpicked products. Find something you like and have it ordered in no time!</p>
+    </div>
+    <div class="banner-footer mt-4">
+      <%= link_to "Order Today", new_line_item_path,  class: "btn btn-primary btn-md px-5" %>
+    </div>
+  </div>
+</section>
+<section id="featured" class="pt-5">
+  <div class="container">
+    <div class="row mt-5">
+      <% @listings.each do |listing| %>
+        <div class="col-md-4 mb-5">
+          <div>
+            <% if listing.images.any? %>
+              <%= image_tag listing.images.first.image_url, class: "card-img-top img-md-eh" %>
+            <% end %>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <h5 class="title text-dark text-truncate"><%= listing.title %></h5>
+                </div>
+              </div>
+            </div>
+            <div class="p-3 bg-light footer">
+              <div class="row">
+                <div class="col-md-8 col-8">
+                  <%= link_to "Order", new_listing_line_item_path(listing), class: "btn bg-white border px-4" %>
+                </div>
+                <div class="col-md-4 col-4 text-right">
+                  <h4 class="text-success m-0 title"><%= humanized_money_with_symbol(listing.price) %></h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>

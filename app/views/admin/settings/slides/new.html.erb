@@ -1,0 +1,16 @@
+<%= content_for(:page_title, 'New Slide') %>
+<div class="row">
+  <div class="col-md-7 mx-auto">
+    <div class="card p-4 mb-5">
+      <div class="title title-md mb-4">New Slide</div>
+      <%= simple_form_for [:admin, :settings, @slide], validate: true do |f| %>
+        <%= f.input :main_title %>
+        <%= f.input :sub_title %>
+        <%= f.input :link_text%>
+        <%= f.input :link_to %>
+        <%= f.input :image, as: :file %>
+        <%= f.button :submit, class: "btn btn-primary btn-md px-5 my-3" %>
+      <% end %>
+    </div>
+  </div>
+</div>

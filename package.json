@@ -1,0 +1,28 @@
+{
+  "name": "rapid_boxing",
+  "private": true,
+  "dependencies": {
+    "@babel/core": "^7",
+    "@babel/preset-react": "^7.0.0",
+    "@rails/webpacker": "^4.0.7",
+    "axios": "^0.19.0",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "formik": "^1.5.8",
+    "json-api-normalizer": "^0.4.16",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-confirm-alert": "^2.4.1",
+    "react-dom": "^16.8.6",
+    "react-loader-spinner": "^3.1.2",
+    "react-modal": "^3.9.1",
+    "react-pdf": "^4.1.0",
+    "react-select": "^3.0.8",
+    "react-sizeme": "^2.6.12",
+    "react-toastify": "^5.3.2",
+    "redux-object": "^0.5.10",
+    "yup": "^0.27.0"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^3.7.2"
+  }
+}

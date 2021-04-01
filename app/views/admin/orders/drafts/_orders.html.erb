@@ -1,0 +1,36 @@
+<div class="row mt-3">
+  <div class="col">
+    <table class="table" id="orders_table ">
+      <thead class="bg-primary-alt text-white">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Address</th>
+          <th scope="col">Items</th>
+          <th scope="col">Created At</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @orders.each do |order| %>
+          <tr>
+            <th scope="row">
+              <%= link_to order.id, admin_orders_draft_path(order), class: "link text-secondary" %>
+            </th>
+            <td class="text-truncate">
+              <% if order.user.present? %>
+                <%= link_to order.user.name, admin_user_path(order.user), class: "link text-secondary" %>
+              <% else %>
+                <%= order.name %>
+              <% end %>
+            </td>
+            <td><%= order.address %></td>
+            <td><%= order.order_items.count %></td>
+            <td>
+              <%= order.created_at.strftime('%B %d') %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

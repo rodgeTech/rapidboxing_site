@@ -1,0 +1,27 @@
+footer {
+  background: linear-gradient(180deg, $primary, #108fd8);
+  color: #fff;
+  font-size: 1.1rem;
+  > .container {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    a {
+      color: #fff;
+    }
+    h4 {
+      font-family: $heading-font;
+    }
+  }
+
+  section {
+    text-align: center;
+    z-index: 99999;
+    padding-top: 25px;
+    padding-bottom: 1px;
+    background: $primary;
+    color: #fff;
+    .copyright {
+      line-height: 0.6;
+    }
+  }
+}

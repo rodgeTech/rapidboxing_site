@@ -1,0 +1,5 @@
+<%= content_for(:page_title, 'Order Status') %>
+
+
+<div id="order-status" data-tracking-number="<%= params[:tracking_number] %>"></div>
+<%= javascript_pack_tag 'orderStatus' %>

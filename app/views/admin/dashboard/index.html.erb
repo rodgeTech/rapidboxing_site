@@ -1,0 +1,127 @@
+<%= content_for(:page_title, 'Dashboard') %>
+<div id="dashboard-wrapper">
+  <div class="row">
+    <div class="col-md-8 mx-auto">
+      <div class="row mb-4">
+        <div class="col-md-12">
+          <h4 class="m-0 text-muted">Welcome, <%= current_user.name %></h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card p-4">
+            <div class="border-bottom">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="title title-xs pb-3"><%= pluralize(Order.unarchived.count, "order") %></div>
+                </div>
+                <div class="col-md-6 text-right">
+                  <p class="m-0 pb-3"><%= Order.today.count %> New Today</p>
+                </div>
+              </div>
+            </div>
+            <div class="row mt-4">
+              <div class="col-md-4 mb-4">
+                <%= link_to admin_orders_path(status: "pending"),  class: "btn btn-light btn-block py-2" do %>
+                  Pending <span class="badge badge-warning ml-2 text-white"><%= Order.unarchived.pending.count %></span>
+                <% end %>
+              </div>
+              <div class="col-md-4 mb-4">
+                <%= link_to admin_orders_path(status: "confirmed"),  class: "btn btn-primary btn-block py-2" do %>
+                  Confirmed <span class="badge badge-light ml-2"><%= Order.unarchived.confirmed.count %></span>
+                <% end %>
+              </div>
+              <div class="col-md-4 mb-4">
+                <%= link_to admin_orders_path(status: "being_shipped"),  class: "btn btn-primary btn-block py-2" do %>
+                  Being Shipped <span class="badge badge-light ml-2"><%= Order.unarchived.being_shipped.count %></span>
+                <% end %>
+              </div>
+              <div class="col-md-4">
+                <%= link_to admin_orders_path(status: "arrived"),  class: "btn btn-success btn-block py-2" do %>
+                  Arrived <span class="badge badge-light ml-2"><%= Order.unarchived.arrived.count %></span>
+                <% end %>
+              </div>
+              <div class="col-md-4">
+                <%= link_to admin_orders_path(status: "out_for_delivery"),  class: "btn btn-success btn-block py-2" do %>
+                  Out For Delivery <span class="badge badge-light ml-2"><%= Order.unarchived.out_for_delivery.count %></span>
+                <% end %>
+              </div>
+              <div class="col-md-4">
+                <%= link_to admin_orders_path(status: "archived"),  class: "btn btn-secondary btn-block py-2" do %>
+                  Archived <span class="badge badge-light ml-2"><%= Order.archived.count %></span>
+                <% end %>
+              </div>
+            </div>
+            <div class="mt-5 text-right">
+              <%= link_to "Manage Orders", admin_orders_path, class: "btn bg-light border px-4" %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row my-4">
+        <div class="col-md-12">
+          <div class="card p-4">
+            <div class="title title-xs border-bottom pb-3">Recent Orders</div>
+            <div class="row mt-4">
+              <div class="col-md-12">
+                <table class="table table-striped" id="listings_table">
+                  <thead class="bg-primary-linear text-white">
+                    <tr>
+                      <th scope="col">Id</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Address</th>
+                      <th scope="col">Items</th>
+                      <th scope="col">Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% Order.unarchived.order(created_at: :desc).limit(4).each do |order| %>
+                      <tr>
+                        <td><%= link_to order.id, admin_order_path(order), class: "link link-secondary" %></td>
+                        <td><%= order.name%></td>
+                        <td><%= order.address %></td>
+                        <td><%= order.order_items.count %></td>
+                        <td><%= format_date_time(order.created_at) %></td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-4 mb-5">
+        <div class="col-md-12">
+          <div class="card p-4">
+            <div class="title title-xs border-bottom pb-3">Recent Deposits</div>
+            <div class="row mt-4">
+              <div class="col-md-12">
+                <table class="table table-striped" id="listings_table">
+                  <thead class="bg-primary-linear text-white">
+                    <tr>
+                      <th scope="col">Order Id</th>
+                      <th scope="col">Amount</th>
+                      <th scope="col">Recorded By</th>
+                      <th scope="col">Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% Deposit.order(created_at: :desc).limit(4).each do |deposit| %>
+                      <tr>
+                        <td><%= link_to deposit.order.id, admin_order_path(deposit.order), class: "link link-secondary" %></td>
+                        <td><%= deposit.amount.format %></td>
+                        <td><%= deposit.recorded_by.name %></td>
+                        <td><%= format_date_time(deposit.created_at) %></td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

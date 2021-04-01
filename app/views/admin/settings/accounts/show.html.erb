@@ -1,0 +1,48 @@
+<div class="custom-card rounded mb-5 p-4">
+<div class="row">
+  <div class="col-md-12">
+    <div class="row mb-4">
+      <div class="col-md-6">
+        <div class="title title-sm">Staff Accounts</div>
+      </div>
+      <div class="col-md-6 text-right">
+        <%= link_to "Invite New User", new_admin_settings_account_path, class: "btn btn-primary px-4"%>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-md-12">
+        <table class="table">
+          <thead class="bg-primary-alt text-white">
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @users.each do |user| %>
+              <tr>
+                <td>
+                  <%= user.name %>
+                  <% unless user.invitation_accepted_at %>
+                    <small class="text-muted">Invitation sent</small>
+                  <% end %>
+                  <% unless user.invitation_accepted_at %>
+                    <div>
+                      <small><%= link_to "Resend", resend_admin_settings_account_path(id: user.id), class: "link text-primary" %></small>
+                      <small><%= link_to "Cancel", admin_settings_account_path(invitation_token: user.invitation_token), class: "link text-secondary", method: :delete %></small>
+                    </div>
+                  <% end %>
+                </td>
+                <td><%= user.email %></td>
+                <td><%= user.created_at.strftime('%B %d, %Y') %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+

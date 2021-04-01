@@ -1,0 +1,99 @@
+/**
+ * Base mixins that are shared across multiple views.
+ *
+ * Index
+ * - Banner
+ * - Fixed Sidebar
+ *
+ */
+
+// Banner
+@mixin banner($img-url, $height: 100px) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f7f7f7;
+  background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url($img-url) no-repeat center center fixed;
+  background-size: cover;
+  height: $height;
+
+  .banner-content {
+    max-width: 1020px;
+    .banner-header,
+    .banner-body,
+    .banner-footer {
+      text-align: center;
+    }
+
+    .banner-header {
+      margin-bottom: 20px;
+
+      span {
+        border-width: 0px;
+        border-color: RGBA(0, 0, 0, 1);
+        border-radius: 0px;
+        border-bottom: 3px solid $primary;
+      }
+    }
+
+    .banner-footer {
+      margin-top: 20px;
+    }
+  }
+}
+
+// Fixed Sidebar
+@mixin navbar-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: $zindex-fixed;
+  font-family: $secondary-font;
+  font-size: 18px;
+
+  a[data-toggle="collapse"] {
+    position: relative;
+  }
+
+  .dropdown-toggle::after {
+    display: none;
+  }
+
+  #ordersSubmenu {
+    font-size: 17px;
+    font-family: $body-font;
+    padding-left: 29px;
+    border-top: 1px solid #ccc;
+  }
+
+  @include media-breakpoint-up($navbar-sidebar-breakpoint) {
+    bottom: 0;
+    width: $navbar-sidebar-width;
+    flex-flow: column nowrap;
+    align-items: flex-start;
+
+    .navbar-collapse {
+      flex-grow: 1;
+      flex-direction: column;
+      width: 100%;
+
+      #top-nav {
+        flex-grow: 1;
+      }
+
+      .navbar-nav {
+        flex-direction: column;
+        width: 100%;
+
+        .nav-item {
+          width: 100%;
+
+          .dropdown-menu {
+            top: 0;
+          }
+        }
+      }
+    }
+  }
+}

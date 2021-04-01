@@ -1,0 +1,43 @@
+<%= content_for(:page_title, 'Our Policies') %>
+<div class="container py-5">
+  <% if LegalSetting.refund_policy %>
+    <div class='row' id="refund_policy">
+      <div class="col-md-8 mx-auto">
+        <div class="title title-md text-info pb-4 text-center">Refund Policy</div>
+        <p>
+          <%= LegalSetting.refund_policy %>
+        </p>
+      </div>
+    </div>
+  <% end %>
+  <% if LegalSetting.shipping_policy %>
+    <div class='row' id="shipping_policy">
+      <div class="col-md-8 mx-auto">
+        <div class="title title-md text-info pb-4 text-center">Shipping Policy</div>
+        <p>
+          <%= LegalSetting.shipping_policy %>
+        </p>
+      </div>
+    </div>
+  <% end %>
+  <% if LegalSetting.delivery_policy %>
+    <div class='row' id="delivery_policy">
+      <div class="col-md-8 mx-auto">
+        <div class="title title-md text-info pb-4 text-center">Delivery Policy</div>
+        <p>
+          <%= LegalSetting.delivery_policy %>
+        </p>
+      </div>
+    </div>
+  <% end %>
+  <% if LegalSetting.privacy_policy %>
+    <div class='row' id="privacy_policy">
+      <div class="col-md-8 mx-auto">
+        <div class="title title-md text-info pb-4 text-center">Privacy Policy</div>
+        <p>
+          <%= LegalSetting.privacy_policy %>
+        </p>
+      </div>
+    </div>
+  <% end %>
+</div>

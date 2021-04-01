@@ -1,0 +1,9 @@
+.pages-about {
+  #home-cta-banner {
+    @include banner(
+      "https://res.cloudinary.com/mybelizecommerce/image/upload/v1559629883/bench-accounting-49908-unsplash_xa5meg.jpg",
+      400px
+    );
+    margin-top: 80px;
+  }
+}

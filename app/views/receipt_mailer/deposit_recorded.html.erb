@@ -1,0 +1,14 @@
+<div style="max-width: 550px; font-size: 16px;">
+  <p>Hi <%= @order.name %>,</p>
+  <p>
+    RapidBoxing is in receipt of payment in the sum of <%= humanized_money_with_symbol(@deposit.amount) %> BZD.
+    Your balance is now <%= humanized_money_with_symbol(@order.balance) %> BZD. This
+    payment deposit was recorded on <%= @deposit.created_at.strftime("%B %d, %Y") %>.
+  </p>
+  <p>The status of your order is <strong><%= @deposit.order.status.split('_').collect(&:capitalize).join(' ') %></strong>. 
+    We will continue to update you on the status of your order</p>
+  <p>Thank you for choosing RapidBoxing. Have a pleasant day!</p>
+  <br/>
+  <p>Sincerely,</p>
+  <p>Your friends at RapidBoxing</p>
+</div>

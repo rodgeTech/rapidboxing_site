@@ -1,0 +1,113 @@
+<div id="invoice-info">
+  <div class="row d-table-row">
+    <div class="col w-25 d-table-cell">
+      <p class="pb-1"><%= @invoice.created_at.strftime('%B %d, %Y %l:%M %p') %></p>
+       <p class="pb-1">Invoice No: <%= @invoice.public_uid %></p>
+      <p>Tracking No: <%= @invoice.order.tracking_number %></p>
+    </div>
+    <div class="col w-25 d-table-cell">
+      <p class="pb-1">Name: <%= @invoice.order.name %></p>
+      <p class="pb-1">Address: <%= @invoice.order.address %></p>
+    </div>
+    <div class="col w-25 d-table-cell">
+      <p class="pb-1">Email: <%= @invoice.order.email %></p>
+      <p>Phone No: <%= @invoice.order.contact_number %></p>
+    </div>
+  </div>
+</div>
+<div id="invoice-items">
+  <table class="table" id="listings_table">
+    <thead class="bg-primary text-white">
+      <tr>
+        <th>Link</th>
+        <th>Qty</th>
+        <th>USD</th>
+        <th>BZD</th>
+        <th>Sub Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @invoice.invoice_items.each do |invoice_item| %>
+        <tr>
+          <td>
+            <%= link_to invoice_item.order_item.link, class: "link link-secondary", target: "_blank" do %>
+              <%= invoice_item.order_item.link %>
+            <% end %>
+          </td>
+          <td><%= invoice_item.order_item.quantity %></td>
+          <td><%= humanized_money_with_symbol(invoice_item.order_item.price) %></td>
+          <td><%= humanized_money_with_symbol(invoice_item.order_item.total) %></td>
+          <td><%= humanized_money_with_symbol(invoice_item.order_item.overall_total) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<div id="balance-overview">
+  <h5 class="pb-1">Total Breakdown</h5>
+  <table class="table">
+    <tr>
+      <th scope="col">Flat Total</th>
+      <td class="text-right"><%= humanized_money_with_symbol(@order.purchase_total,  { disambiguate: true }) %></td>
+    </tr>
+    <tr>
+      <th scope="col">Shipping Fee</th>
+      <td class="text-right"><%= humanized_money_with_symbol(@order.flat_shipping,  { disambiguate: true }) %></td>
+    </tr>
+    <tr>
+      <th scope="col">Add'l Lbs</th>
+      <td class="text-right"><%= humanized_money_with_symbol(@order.additional_pounds_total,  { disambiguate: true }) %></td>
+    </tr>
+    <tr>
+      <th scope="col">Local Pickup</th>
+      <td class="text-right"><%= humanized_money_with_symbol(@order.local_pickup_total,  { disambiguate: true }) %></td>
+    </tr>
+    <tr>
+      <th scope="col">Service Charge</th>
+      <td class="text-right"><%= humanized_money_with_symbol(@order.service_charge,  { disambiguate: true }) %></td>
+    </tr>
+    <tr>
+      <th scope="col">Duty</th>
+      <td class="text-right"><%= humanized_money_with_symbol(@order.duty,  { disambiguate: true }) %></td>
+    </tr>
+     <tr>
+      <th scope="col">Insurance</th>
+      <td class="text-right"><%= humanized_money_with_symbol(@order.insurance_total,  { disambiguate: true }) %></td>
+    </tr>
+    <tr>
+      <th scope="col">GST</th>
+      <td class="text-right"><%= humanized_money_with_symbol(@order.tax,  { disambiguate: true }) %></td>
+    </tr>
+    <tr id="final-total">
+      <th scope="col"><strong>Final Total</strong></th>
+      <td class="text-right">
+        <p class="m-0"><strong><%= humanized_money_with_symbol(@order.total,  { disambiguate: true }) %></strong></p>
+        <p>Deposit required to process order: <%= humanized_money_with_symbol(@order.initial_deposit,  { disambiguate: true }) %></p>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="footer">
+  <table>
+    <tr>
+      <th>Atlantic Bank</th>
+      <th>Belize Bank</th>
+      <th>Scotia Bank</th>
+      <th>Heritage Bank</th>
+    </tr>
+    <tr>
+      <td>
+        <p><%= BankSetting.atlantic_bank.present? ? BankSetting.atlantic_bank : "N/A" %></p>
+      </td>
+      <td>
+        <p><%= BankSetting.belize_bank.present? ? BankSetting.belize_bank : "N/A" %></p>
+      </td>
+      <td>
+        <p><%= BankSetting.scotia_bank.present? ? BankSetting.scotia_bank : "N/A" %></p>
+      </td>
+      <td>
+        <p><%= BankSetting.heritage_bank.present? ? BankSetting.heritage_bank : "N/A" %></p>
+      </td>
+    </tr>
+  </table>
+</div>

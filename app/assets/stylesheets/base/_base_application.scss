@@ -1,0 +1,16 @@
+/**
+ * General base styles to be used strictly for application-layout views.
+ *
+ */
+
+.application-body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+  margin-bottom: 40px;
+  margin-top: 5rem;
+}

@@ -1,0 +1,18 @@
+.carts-show {
+  background: #F3FAFF;
+  
+  #cart-header {
+    padding-bottom: 16px;
+  }
+  #cart-line-items {
+    margin-top: 60px;
+    margin-bottom: 85px;
+  }
+  .line-item {
+    margin-bottom: 40px;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 0 0 1px rgba(63, 63, 68, 0.05), 0 1px 3px 0 rgba(63, 63, 68, 0.15);
+  }
+
+}

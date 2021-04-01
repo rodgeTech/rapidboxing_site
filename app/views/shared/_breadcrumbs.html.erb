@@ -1,0 +1,13 @@
+  <nav aria-label="breadcrumb">
+  <ol class='breadcrumb'>
+    <% breadcrumb_trail do |crumb| %>
+      <li class="breadcrumb-item <%= crumb.current? ? 'active' : '' %> <%= crumb.url === '#' ? 'incomplete' : '' %>" >
+        <% if crumb.url === '#'%>
+          <%= crumb.name %>
+        <% else %>
+          <%= link_to_unless crumb.current?, crumb.name, crumb.url, (crumb.current? ? {'aria-current' => 'page'} : {}) %>
+        <% end %>
+      </li>
+    <% end %>
+  </ol>
+</nav>

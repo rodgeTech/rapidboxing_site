@@ -1,0 +1,72 @@
+<header class="fixed-top">
+  <nav class="navbar navbar-expand-md navbar-dark  ">
+    <div class="container-fluid">
+      <%= link_to root_path, class: "navbar-brand" do %>
+        <%= image_tag "logo.png", class: "navbar-logo" %> Rapid Boxing
+      <% end %>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <%= link_to "Featured", shop_path, class: "btn btn-link text-white" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Track Order", track_order_path, class: "btn btn-link text-white"%>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Order", new_line_item_path, class: "btn btn-link text-white"%>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Calculator", calculator_path, class: "btn btn-link text-white"%>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Contact us", contact_path, class: "btn btn-link text-white"%>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto" id="mainNavActions">
+          <% if current_user %>
+            <% if current_user.admin? %>
+              <li class="nav-item mr-sm-3">
+                <%= dashboard_link %>
+              </li>
+            <% else %>
+              <li class="nav-item mr-sm-3">
+                <%= link_to orders_path, class: "btn btn-primary bg-primary-alt text-white" do %>
+                  <i class="fas fa-boxes mr-2"></i> My Orders
+                <% end %>
+              </li>
+              <li class="nav-item mr-sm-3">
+                <div class="dropdown">
+                  <button class="btn btn-primary bg-primary-alt dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="far fa-user"></i> Hi, <%= current_user.name.split(" ")[0] %>
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <%= link_to "Settings", edit_user_registration_path, class: "dropdown-item"%>
+                    <div class="dropdown-divider"></div>
+                    <%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "dropdown-item"%>
+                  </div>
+                </div>
+              </li>
+            <% end %>
+          <% else %>
+            <li class="nav-item mr-2">
+              <%= link_to "Sign In", new_user_session_path, class: "btn btn-link text-white"%>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-primary px-3 mr-0 mr-sm-3"%>
+            </li>
+          <% end %>
+          <li class="nav-item">
+            <%= link_to cart_path, class: "btn btn-primary px-3" do %>
+              <i class="fa fa-shopping-cart mr-2"></i>
+              <span class="badge badge-light"><%= @cart.total_items %></span>
+            </button>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+</header>

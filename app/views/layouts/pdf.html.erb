@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <link href="https://fonts.googleapis.com/css?family=Viga|Montserrat|Source+Sans+Pro&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <%= wicked_pdf_stylesheet_link_tag "pdf" %>
+  </head>
+  <body class="pdf-body">
+    <div class="container">
+      <div id="pdf-header">
+        <div class="row d-table-row">
+          <div class="col w-25 d-table-cell">
+            <div class="title-md text-info"><strong>RapidBoxing</strong></div>
+          </div>
+          <div class="col w-50 d-table-cell text-right company-contact">
+            <p class="text-secondary">www.rapidboxing.com</p>
+            <p>info@rapidboxing.com</p>
+            <p>501-639-7244</p>
+          </div>
+        </div>
+      </div>
+      <%= yield %>
+    </div>
+  </body>
+</html>

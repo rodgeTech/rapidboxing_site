@@ -1,0 +1,16 @@
+<%= content_for(:page_title, 'Catalog') %>
+<div class="mb-5">
+  <div class="row mb-3">
+    <div class="col-md-8">
+      <div class="title title-md">Archived <span class="title-light ml-3"><%= Order.archived.count %></span></div>
+    </div>
+  </div>
+  <% if @orders.any? ||  %>
+    <%= render 'orders' %>
+    <%= paginate @orders, :params => { :anchor => 'orders_table' } %>
+  <% else %>
+    <div class="text-center pt-5 border-top">
+      <h3 class="title-light">No archived orders...</h3>
+    </div>
+  <% end %>
+</div>

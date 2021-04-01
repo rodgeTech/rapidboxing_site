@@ -1,0 +1,66 @@
+<div class="custom-card rounded mb-5 p-4">
+  <div class="row">
+    <div class="col-md-12 mx-auto">
+      <div class="row mb-3">
+        <div class="col-md-8">
+          <div class="title title-md"><%= @user.name %></div>
+          <p class="text-muted m-0 title-light font-size-xs"><%= @user.email %> | Joined on <%= @user.created_at.strftime('%d %B %Y')%></p>
+        </div>
+        <div class="col-md-4 text-right">
+          <h3 class="pt-2"><%=  pluralize @orders.count, "Order" %></h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="row mt-3">
+            <div class="col">
+              <table class="table" id="orders_table ">
+                <thead class="bg-primary-alt text-white">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Items</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Created At</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @orders.each do |order| %>
+                    <tr>
+                      <th scope="row">
+                        <% if order.archive? %>
+                          <%= link_to order.id, admin_orders_archive_path(order), class: "link link-secondary" %>
+                        <% elsif order.draft? %>
+                          <%= link_to order.id, admin_orders_draft_path(order), class: "link link-secondary" %>
+                        <% else %>
+                          <%= link_to order.id, admin_order_path(order), class: "link link-secondary" %>
+                        <% end %>
+                      </th>
+                      <td><%= order.address %></td>
+                      <td><%= order.order_items.count %></td>
+                      <td>
+                        <%= order_status(order.status)  %>
+                      </td>
+                      <td>
+                        <%= order.created_at.strftime('%B %d') %>
+                      </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center border-top mt-5 pt-3">
+        <div class="row">
+          <div class="col">
+            <%= link_to admin_user_path(@user), class: "link link-secondary", method: :delete, data: { confirm: 'Are you sure?' } do %>
+              <i class="far fa-trash-alt"></i> Delete User Account
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

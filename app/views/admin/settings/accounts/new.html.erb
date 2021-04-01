@@ -1,0 +1,13 @@
+<%= content_for(:page_title, 'Add staff account') %>
+<div class="row mb-5">
+  <div class="col-md-6 mx-auto">
+    <div class="custom-card rounded p-4 mb-5">
+      <div class="title title-sm mb-3">Add a staff account</div>
+      <%= simple_form_for @user, url: admin_settings_account_path, method: :post, validate: true do |f| %>
+        <%= f.input :name %>
+        <%= f.input :email %>
+        <%= f.button :submit, "Invite", class: "btn btn-primary  px-5 my-3" %>
+      <% end %>
+    </div>
+  </div>
+</div>

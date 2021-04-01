@@ -1,0 +1,48 @@
+<div class="row mb-5">
+  <div class="col-md-7 mx-auto">
+    <div class="custom-card rounded p-4">
+      <div class="title title-sm mb-4">Manage Rates & Fees</div>
+      <%= form_for(Setting.new, url: admin_settings_rates_path) do |f| %>
+        <div class="form-group">
+          <label class="control-label">Exchange Rate</label>
+          <%= f.number_field :exchange_rate, value: RateSetting.exchange_rate, step: :any, class: "form-control"  %>
+          <div>
+            <small class="text-secondary">$1 BZD = $<%= RateSetting.exchange_rate %> USD</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label">GST</label>
+          <%= f.number_field :tax, value: RateSetting.tax, step: :any, class: "form-control"  %>
+        </div>
+        <div class="form-group">
+          <label class="control-label">Duty Rate (estimation)</label>
+          <%= f.number_field :duty_rate, value: RateSetting.duty_rate, step: :any, class: "form-control"  %>
+        </div>
+        <div class="form-group">
+          <label class="control-label">Service Charge</label>
+          <%= f.number_field :service_charge, value: RateSetting.service_charge, step: :any, class: "form-control"  %>
+        </div>
+        <div class="form-group">
+          <label class="control-label">Insurance</label>
+          <%= f.number_field :insurance, value: RateSetting.insurance, step: :any, class: "form-control"  %>
+        </div>
+        <div class="form-group">
+          <label class="control-label">Initial Deposit (%)</label>
+          <%= f.number_field :initial_deposit, value: RateSetting.initial_deposit, step: :any, class: "form-control"  %>
+        </div>
+        <div class="form-group">
+          <label class="control-label">Additional Pounds</label>
+          <%= f.number_field :additional_pounds, value: RateSetting.additional_pounds, step: :any, class: "form-control"  %>
+        </div>
+         <div class="form-group">
+          <label class="control-label">Pickup Fee</label>
+          <%= f.number_field :pickup_fee, value: RateSetting.pickup_fee, step: :any, class: "form-control"  %>
+          <div>
+            <small class="text-secondary">Optional local (Hialeah) pickup fee</small>
+          </div>
+        </div>
+        <%= f.submit "Update", class: "btn btn-primary mt-3 px-5" %>
+      <% end %>
+    </div>
+  </div>
+</div>

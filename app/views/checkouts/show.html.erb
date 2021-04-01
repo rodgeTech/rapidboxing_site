@@ -1,0 +1,6 @@
+<%= content_for(:page_title, 'Checkout') %>
+
+<%= render 'shared/breadcrumbs' %>
+
+<div id="checkout" data-user="<%= current_user.present? %>"></div>
+<%= javascript_pack_tag 'checkout' %>

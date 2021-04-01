@@ -1,0 +1,161 @@
+<%= content_for(:page_title, "Order #{@order.tracking_number}") %>
+<div class="container-fluid px-5">
+  <div class="order-status mb-5 pt-5">
+    <% Order.statuses.keys.each_with_index do |status, index| %>
+      <div class="status <%= status_classname(Order.statuses[@order.status], index) %>">
+        <p>
+          <i class="<%= icon_classname(Order.statuses[@order.status], index) %>"></i>
+          <%= order_status(status)  %>
+        </p>
+      </div>
+    <% end %>
+  </div >
+  <div class="p-4 custom-card">
+    <div class="row pb-3">
+      <div class="col-md-7">
+        <div class="d-flex">
+          <h3 class="title title-md m-0">Order #<%= @order.tracking_number %></h3>
+          <% if @order.invoice.present? %>
+            <%= link_to order_invoice_path(@order, format: :pdf), class: "link text-secondary pt-2 ml-3", target: "_blank" do %>
+              <i class="far fa-file-pdf mr-1"></i> View Invoice 
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-md-5">
+        <h4 class="text-right text-secondary pt-2"><%= @order.created_at.strftime('%B %d, %Y') %></h4>
+      </div>
+    </div>
+    <div class="row pb-3">
+      <div class="col-md-12">
+        <table class="table table-striped">
+          <thead class="bg-primary-alt text-white">
+            <tr>
+              <th scope="col">Flat Order Total</th>
+              <th scope="col">Shipping Total</th>
+              <th scope="col">Fees Total</th>
+              <th scope="col">Total</th>
+              <th scope="col">Balance</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <%= humanized_money_with_symbol(@order.purchase_total, { disambiguate: true }) %>
+              </td>
+              <td><%= humanized_money_with_symbol(@order.shipping, { disambiguate: true }) %></td>
+              <td><%= humanized_money_with_symbol(@order.fees_total, { disambiguate: true }) %></td>
+              <td class="bg-light border-left border-right">
+                <%= humanized_money_with_symbol(@order.total, { disambiguate: true })  %>
+              </td>
+              <td class="bg-light text-success">
+                <%= humanized_money_with_symbol(@order.balance, { disambiguate: true })  %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-4 mb-5">
+    <div class="col-md-9">
+      <div class="">
+        <% @order.order_items.each do |order_item| %>
+          <div class="p-4 order-line-item custom-card">
+            <div class="row mb-2">
+              <div class="col-md-2">
+                <h5>Link:</h5>
+              </div>
+              <div class="col-md-10">
+                <p class="text-truncate m-0"><%= link_to order_item.link, order_item.link, target: "_blank", class: "link text-secondary" %></p>
+              </div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-md-2">
+                <h5>Details:</h5>
+              </div>
+              <div class="col-md-10">
+                <p class="m-0"><%= order_item.details.empty? ? "N/A" : order_item.details %></p>
+              </div>
+            </div>
+            <div class="row  mb-2">
+              <div class="col-md-2">
+                <h5>Quantity:</h5>
+              </div>
+              <div class="col-md-10">
+                <p class="m-0"><%= order_item.quantity %></p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-2">
+                <h5>Costs:</h5>
+              </div>
+              <div class="col-md-10">
+                <table class="table table-sm title-light" style="font-size: 17px">
+                  <thead class="bg-primary-alt text-white">
+                    <tr>
+                      <th scope="col">GST</th>
+                      <th scope="col">Price</th>
+                      <th scope="col">Shipping</th>
+                      <th scope="col">Add'l Lbs</th>
+                      <th scope="col">Duty</th>
+                      <th scope="col">Service</th>
+                      <th scope="col">Insurance</th>
+                      <th scope="col">Pickup</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><%= number_to_currency(order_item.tax_total) %></td>
+                      <td><%= number_to_currency(order_item.total) %></td>
+                      <td><%= number_to_currency(order_item.flat_shipping_total) %></td>
+                      <td><%= number_to_currency(order_item.additional_pounds_total) %></td>
+                      <td><%= number_to_currency(order_item.duty_total) %></td>
+                      <td><%= number_to_currency(order_item.service_charge_total) %></td>
+                      <td><%= number_to_currency(order_item.insurance_total) %></td>
+                      <td><%= number_to_currency(order_item.local_pickup_total) %></td>
+                    </tr>
+                    <tr class="bg-dark">
+                      <th scope="row" colspan="7" class="text-white">Sub Total:</th>
+                      <td class="text-success title"><%= humanized_money_with_symbol(order_item.overall_total, { disambiguate: true }) %></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md-3 ml-auto">
+      <div class="p-3 order-deposits custom-card rounded">
+        <h4 class="mb-3 border-bottom pb-3">
+         Recent Deposits
+        </h4>
+        <% if @order.deposits.any? %>
+          <% @order.deposits.each do |deposit| %>
+            <div class="order-deposit py-2 ">
+              <div class="row">
+                <div class="col-md-7">
+                  <p class="m-0"><strong><%= number_to_currency(deposit.amount) %></strong></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <p class="text-truncate m-0">Recorded by <%= deposit.recorded_by.name %></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <p class="m-0">On <%= deposit.recorded_by.created_at.strftime('%B %d, %Y') %></p>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% else%>
+          <p>No deposits recorded</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

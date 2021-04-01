@@ -1,0 +1,73 @@
+
+<% @line_items.each do |line_item| %>
+  <div class="custom-card bg-white rounded p-4 mb-4">
+    <div class="row">
+      <div class="<%= line_item.details.present? ? "col-md-2" : "col-md-4" %>">
+        <% if line_item.listing.present? %>
+        <%= link_to line_item.listing.link,  class: "link link-secondary", target: :_blank do %>
+          <%= image_tag line_item.listing.images.first.image_url(:thumb), class: "img-fluid" %>
+          <p class="font-size-xs title-light pt-2" title="<%= line_item.listing.title %>">
+            <%= line_item.listing.title.truncate(80) %>
+          </p>
+          <% end %>
+        <% else%>
+          <%= link_to line_item.link, target: "_blank", class: 'link text-dark' do %>
+            <i class="fas fa-external-link-alt"></i> Open item link
+          <% end %>
+          <p class="title-light m-0 text-truncate" style="font-size: 14px;">
+            <%= link_to line_item.link , class: "link text-dark", target: :_blank  do %>
+              <%= line_item.link  %>
+            <% end %>
+          </p>
+        <% end %>
+      </div>
+      <% if line_item.details.present? %>
+      <div class="col-md-4">
+        <h5 style="font-size: 1.25rem">Additional Details</h4>
+        <p class="title-light m-0 font-size-xs"><%= line_item.details %></p>
+      </div>
+      <% end %>
+      <div class="<%= line_item.details.present? ? "col-md-3" : "col-md-4" %>">
+        <% if line_item.shipping_rate.present? %>
+          <%= simple_form_for line_item, validate: true do |f| %>
+            <% if line_item.shipping_rate.type === 'WeightShippingRate' %>
+              <%= f.association :shipping_rate,
+               collection: WeightShippingRate.all, 
+               include_blank: false, 
+               input_html: {onchange: 'this.form.submit();'},
+               disabled: line_item.listing.present?
+              %>
+            <% else %>
+              <%= f.association :shipping_rate, collection: PriceShippingRate.all, include_blank: false,  input_html: {onchange: 'this.form.submit();'} %>
+            <% end %>
+            <%= f.input :extra_pounds,  label: 'Additional pounds' %>
+            <%= f.input :local_pickup, input_html: {onchange: 'this.form.submit();'} %>
+          <% end %>
+        <% else %>
+          <%= simple_form_for line_item, validate: true do |f| %>
+            <% if ShippingSetting.rate_method === 'weight' %>
+              <%= f.association :shipping_rate, collection: WeightShippingRate.all, include_blank: false, input_html: {onchange: 'this.form.submit();'} %>
+            <% elsif ShippingSetting.rate_method === 'price'  %>
+              <%= f.association :shipping_rate, collection: PriceShippingRate.all, include_blank: false, input_html: {onchange: 'this.form.submit();'} %>
+            <% end %>
+            <%= f.input :extra_pounds, label: 'Additional pounds' %>
+            <%= f.input :local_pickup, input_html: {onchange: 'this.form.submit();'} %>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="<%= line_item.details.present? ? "col-md-2" : "col-md-3" %>">
+        <%= simple_form_for line_item, validate: true do |f| %>
+          <%= f.input :quantity, collection: 1..10, input_html: {onchange: 'this.form.submit();'} %>
+        <% end %>
+        <%= simple_form_for line_item, validate: true do |f| %>
+          <%= f.input :price, hint: 'Hit enter to update', disabled: line_item.listing.present? %>
+        <% end %>
+      </div>
+      <div class="col-md-1 text-right">
+        <%= link_to line_item_path(line_item), method: :delete, class: "link link-secondary" do %>
+          <i class="far fa-trash-alt"></i>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

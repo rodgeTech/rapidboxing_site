@@ -1,0 +1,46 @@
+.admin-orders-show {
+  #order-details {
+    padding: 18px 0;
+    padding-top: 30px;
+    margin-top: 10px;
+    p {
+      margin: 0;
+    }
+    .title-light {
+      margin-bottom: 20px;
+      padding-bottom: 3px;
+    }
+  }
+  .admin-order-items {
+    border-top: 1px solid #f7f7f7;
+    padding-top: 20px;
+  }
+  table {
+    table-layout: fixed;
+
+    td {
+      white-space: normal !important; // To consider whitespace.
+    }
+  }
+  .deposit-item {
+    border-bottom: 1px solid #e7e7e7;
+    &:last-of-type {
+      border: none;
+    }
+  }
+  .btn-link {
+    font-size: $font-sm;
+    text-decoration: none;
+  }
+
+  @media only screen and (max-width: 768px) {
+    .order-status {
+      .status {
+        display: none;
+      }
+      .status-current {
+        display: flex;
+      }
+    }
+  }
+}

@@ -1,0 +1,31 @@
+.imagebox {
+  padding: 0px;
+  position: relative;
+  text-align: center;
+  width: 100%;
+}
+
+.imagebox img {
+  opacity: 1;
+  transition: 0.5s opacity;
+  box-shadow: 1px 1px 14px 0px rgba(0, 0, 0, 0.4);
+  border-radius: 8px;
+}
+
+.imagebox .imagebox-desc {
+  background-color: rgba(0, 0, 0, 0.6);
+  bottom: 0px;
+  color: white;
+  font-size: 1em;
+  left: 0px;
+  padding: 10px 15px;
+  position: absolute;
+  transition: 0.5s padding;
+  text-align: center;
+  width: 100%;
+  border-radius: 0 0px 8px 8px;
+}
+
+.imagebox:hover img {
+  opacity: 0.7;
+}

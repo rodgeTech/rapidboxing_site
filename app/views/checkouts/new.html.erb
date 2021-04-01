@@ -1,0 +1,81 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-7 col-12 checkout-form">
+      <%= link_to root_path, class: "checkout-logo" do %>
+        <%= image_tag "logo.jpg" %>
+      <% end %>
+      <%= render 'shared/breadcrumbs' %>
+      <%= simple_form_for @order, :url => checkouts_path do |f| %>
+        <h5 class="mb-2 pt-4">Contact Information</h5>
+        <%= f.input :email, input_html: {value: current_user ? current_user.email : ""} %>
+        <%= f.input :contact_number %>
+        <h5 class="mb-2 pt-2">Delivery Address</h5>
+        <%= f.input :name, input_html: {value: current_user ? current_user.name : ""} %>
+        <%= f.input :address %>
+        <div class="row mt-5">
+          <div class="col-md-6">
+            <%= link_to "Return to cart", cart_path %>
+          </div>
+          <div class="col-md-6 text-right">
+            <%= f.button :submit, "Submit Order", class: "btn btn-success btn-md px-5"  %>
+          </div>
+        </div>
+      <% end %>
+      <div class="border-top mt-5 pt-3">
+        <div class="row text-muted">
+          <% if LegalSetting.refund_policy%>
+            <div class="col-md-3">
+              <%= link_to "Refund policy", policies_path(anchor: "refund_policy"), class: "font-size-xs link link-secondary" %>
+            </div>
+          <% end %>
+          <% if LegalSetting.shipping_policy%>
+            <div class="col-md-3">
+              <%= link_to "Shipping policy", policies_path(anchor: "shipping_policy"), class: "font-size-xs link link-secondary" %>
+            </div>
+          <% end %>
+          <% if LegalSetting.delivery_policy%>
+            <div class="col-md-3">
+              <%= link_to "Delivery policy", policies_path(anchor: "delivery_policy"), class: "font-size-xs link link-secondary" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-5 col-12 line-items ">
+      <% @cart.line_items.each do |line_item| %>
+        <div class="line-item">
+          <div class="row">
+            <% if line_item.listing.present? %>
+              <div class="col-sm-3 col-5">
+                <%= image_tag line_item.listing.images.first.image_url, class: "img-fluid" %>
+              </div>
+            <% end %>
+            <div class="<%= line_item.listing.present? ? 'col-md-5 pt-4' : 'col-md-8' %>">
+              <% if line_item.listing.present? %>
+                <%= link_to line_item.link, class: "link text-dark", target: "_blank"  do %>
+                  <%= line_item.listing.title.truncate(80) %>
+                <% end %>
+              <% else %>
+                <%= link_to line_item.link, class: "link text-dark", target: "_blank"  do %>
+                  <p class="text-truncate m-0"><%= line_item.link.truncate(80) %></p>
+                <% end %>
+              <% end %>
+            </div>
+            <div class="col-md-4 text-sm-right">
+              <%= humanized_money_with_symbol(line_item.overall_total) %>
+              <span class="badge badge-secondary ml-2"><%= line_item.quantity %></span>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <div class="row pt-4 pb-3">
+        <div class="col-sm-5 col-5">
+          <h5>Est. Total</h5>
+        </div>
+        <div class="col-sm-7 col-7 text-right">
+          <h4 class='title'><%= humanized_money_with_symbol(@cart.estimated_total) %> BZD</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

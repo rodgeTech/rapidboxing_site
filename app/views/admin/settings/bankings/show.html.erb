@@ -1,0 +1,59 @@
+<div class="row mb-5">
+  <div class="col-md-7 mx-auto">
+    <div class="custom-card rounded  p-4">
+      <div class="title title-sm">Banking Settings</div>
+      <p class="mb-4 text-muted">Enter your bank account numbers below</p>
+      <%= form_for(Setting.new, url: admin_settings_banking_path) do |f| %>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-6">
+              <label class="control-label">Belize Bank No.</label>
+              <%= f.text_field :belize_bank, value: BankSetting.belize_bank, class: "form-control"  %>
+            </div>
+            <div class="col-md-6">
+              <label class="control-label">Account Name</label>
+              <%= f.text_field :belize_bank_account_name, value: BankSetting.belize_bank_account_name, class: "form-control"  %>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-6">
+              <label class="control-label">Atlantic Bank No.</label>
+              <%= f.text_field :atlantic_bank, value: BankSetting.atlantic_bank, class: "form-control"  %>
+            </div>
+            <div class="col-md-6">
+              <label class="control-label">Account Name</label>
+              <%= f.text_field :atlantic_bank_account_name, value: BankSetting.atlantic_bank_account_name, class: "form-control"  %>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-6">
+              <label class="control-label">Scotia Bank No.</label>
+              <%= f.text_field :scotia_bank, value: BankSetting.scotia_bank, class: "form-control"  %>
+            </div>
+            <div class="col-md-6">
+              <label class="control-label">Account Name</label>
+              <%= f.text_field :scotia_bank_account_name, value: BankSetting.scotia_bank_account_name, class: "form-control"  %>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-6">
+              <label class="control-label">Heritage Bank No.</label>
+              <%= f.text_field :heritage_bank, value: BankSetting.heritage_bank, class: "form-control"  %>
+            </div>
+            <div class="col-md-6">
+              <label class="control-label">Account Name</label>
+              <%= f.text_field :heritage_bank_account_name, value: BankSetting.heritage_bank_account_name, class: "form-control"  %>
+            </div>
+          </div>
+        </div>
+        <%= f.submit "Update", class: "btn btn-primary mt-3 px-5" %>
+      <% end %>
+    </div>
+  </div>
+</div>

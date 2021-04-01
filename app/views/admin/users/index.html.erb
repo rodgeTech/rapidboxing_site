@@ -1,0 +1,51 @@
+<%= content_for(:page_title, 'Users') %>
+<div class="mb-5">
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <div class="title title-md">
+        User Management <span class="title-light ml-3"><%= User.not_admin.confirmed.count %></span>
+      </div>
+      <p>Manage your customer accounts and their orders</p>
+    </div>
+    <div class="col-md-5 text-right pt-4 ml-auto">
+      <%= form_tag admin_users_path, method: :get, class: "input-group input-group-transparent" do %>
+        <%= text_field_tag :query, params[:query], class: "form-control form-control-md border rounded-left",
+                          placeholder: "Search for users" %>
+        <div class="input-group-append">
+          <button type="submit" class="btn btn-primary  my-sm-0">
+            <i class="fas fa-search mr-2"></i> Search
+          </button>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="custom-card rounded p-4 mb-4">
+    <div class="row">
+      <div class="col">
+        <table class="table table-striped table-responsive-sm" id="users_table">
+          <thead class="title-light">
+            <tr>
+              <th scope="col" style="width: 25%">Name</th>
+              <th scope="col" style="width: 25%">Email</th>
+              <th scope="col" style="width: 25%">Orders</th>
+              <th scope="col" style="width: 25%">Signed Up At</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @users.each do |user| %>
+              <tr>
+                <td class="text-truncate">
+                  <%= link_to user.name, admin_user_path(user), class: "link link-secondary" %>
+                </td>
+                <td><%= user.email %></td>
+                <td><%= user.active_orders.count > 0 ? user.active_orders.count : "None" %></td>
+                <td><%= user.created_at.strftime('%d %B %Y') %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <%= paginate @users, :params => { :anchor => 'users_table' } %>
+</div>

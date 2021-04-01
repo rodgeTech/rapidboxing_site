@@ -1,0 +1,34 @@
+<table class="table table-striped" id="orders_table ">
+  <thead class="title-light">
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Items</th>
+      <th scope="col">Status</th>
+      <th scope="col">Total</th>
+      <th scope="col">Balance</th>
+      <th scope="col">Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @orders.each do |order| %>
+      <tr>
+        <th scope="row">
+          <%= link_to order.id, order_path(order), class: "link link-secondary" %>
+        </th>
+        <td><%= order.order_items.count %></td>
+        <td>
+          <%= order_status(order.status)  %>
+        </td>
+        <td>
+          <%= number_to_currency(order.total)  %>
+        </td>
+        <td>
+          <%= number_to_currency(order.balance)  %>
+        </td>
+        <td>
+          <%= order.created_at.strftime('%B %d') %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

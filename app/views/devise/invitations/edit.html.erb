@@ -1,0 +1,18 @@
+<div class="container my-5">
+  <div class="row">
+    <div class="col-md-5 mx-auto">
+      <h2 class="mb-3"><%= t "devise.invitations.edit.header" %></h2>
+      <%= simple_form_for(resource, as: resource_name, url: invitation_path(resource_name), html: { method: :put }) do |f| %>
+        <%= f.error_notification %>
+        <%= f.hidden_field :invitation_token %>
+        <div class="form-inputs">
+          <%= f.input :password %>
+          <%= f.input :password_confirmation %>
+        </div>
+        <div class="form-actions mt-4">
+          <%= f.button :submit, t("devise.invitations.edit.submit_button"), class: "btn btn-primary px-5" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

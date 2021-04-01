@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  min_order_weight: 9.99
+  max_order_weight: 9.99
+  free_shipping: false
+  type: 
+
+two:
+  name: MyString
+  min_order_weight: 9.99
+  max_order_weight: 9.99
+  free_shipping: false
+  type: 

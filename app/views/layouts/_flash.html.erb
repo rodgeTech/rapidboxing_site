@@ -1,0 +1,10 @@
+<% if flash.any? %>
+  <% flash.each do |type, msg| %>
+    <% if msg %>
+      <div class="container mt-5 alert <%= bootstrap_class_for_flash(type) %> alert-dismissable fade show">
+        <%= msg %>
+        <button class="close" data-dismiss="alert">x</button>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>

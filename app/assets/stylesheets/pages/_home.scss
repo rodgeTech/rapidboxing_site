@@ -1,0 +1,96 @@
+.pages-home {
+  .navbar {
+    background: transparent;
+    .navbar-brand {
+      font-size: 1.4rem;
+    }
+
+    .nav-item {
+      margin-top: 2px;
+    }
+  }
+
+  header.fixed-top.scrolled {
+    background-color: $primary !important;
+    transition: background-color 200ms linear;
+  }
+
+  .main-content {
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+
+  #hero {
+    background: #0088bf;
+    padding: 80px 0;
+    color: #fff;
+
+    h1 {
+      font-size: 34px;
+    }
+
+    #shipment-date {
+      box-shadow: 1px 1px 32px 0px rgba(0, 0, 0, 0.4);
+      background: #fff;
+      text-align: center;
+      color: rgb(32, 32, 32);
+      border-radius: 0.2rem;
+      padding: 35px 0;
+    }
+  }
+
+  #mobile-app {
+    padding-top: 90px;
+    padding-bottom: 90px;
+    border-top: 8px solid #f1f1f1;
+    background: #fff;
+  }
+
+  #services {
+    padding-top: 90px;
+    padding-bottom: 100px;
+    background: #f7f7f7;
+  }
+
+  #stores {
+    background: #0088bf;
+
+    .container-fluid {
+      padding: 0;
+    }
+    .inner-content {
+      color: #fff;
+      padding: 50px 20px;
+      padding-bottom: 70px;
+      img {
+        height: 95px;
+      }
+    }
+  }
+
+  #recent-orders {
+    padding-top: 80px;
+  }
+
+  #home-cta-banner {
+    @include banner(
+      "https://elasticbeanstalk-us-east-1-366162908359.s3.amazonaws.com/rapidboxing/boxingfinal.jpg",
+      400px
+    );
+    margin-top: 80px;
+  }
+
+  .card .footer {
+    background: #f3faff;
+  }
+
+  #brands-carousel {
+    img {
+      width: 100px;
+      height: 100px;
+    }
+    .carousel-indicators {
+      bottom: -42px;
+    }
+  }
+}

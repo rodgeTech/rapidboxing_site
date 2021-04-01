@@ -1,0 +1,67 @@
+.pdf-body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue",
+    sans-serif !important;
+  font-size: 15px;
+  #pdf-header {
+    border-bottom: 3px solid $primary;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    .company-contact {
+      vertical-align: top;
+      p {
+        margin: 0;
+        line-height: 1.35;
+      }
+    }
+  }
+  #invoice-info {
+    padding: 10px 0;
+    margin-bottom: 20px;
+    line-height: 1rem;
+    p {
+      margin: 0;
+    }
+  }
+  #invoice-items {
+    tbody tr {
+      border: 0;
+    }
+    tbody tr td {
+      border: 0;
+      border-bottom: 1px solid #e0e0e0;
+    }
+  }
+  thead {
+    th {
+      border: 0;
+    }
+  }
+
+  #final-total {
+    background: #f7f7f7;
+  }
+
+  #balance-overview {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    border-bottom: 3px solid $primary;
+    #balance {
+      border: 1px solid $success;
+    }
+    td,
+    th {
+      border-top: 1px dotted #e0e0e0 !important;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+  #footer {
+    table {
+      table-layout: fixed !important;
+      width: 100%;
+    }
+    th {
+      color: #5e5e5e;
+    }
+  }
+}

@@ -1,0 +1,12 @@
+/**
+ * General base styles to be used strictly for admin-layout views.
+ *
+ */
+
+body {
+  padding-top: 50px;
+
+  @include media-breakpoint-up($navbar-sidebar-breakpoint) {
+    margin-left: $navbar-sidebar-width;
+  }
+}

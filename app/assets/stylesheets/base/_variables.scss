@@ -1,0 +1,34 @@
+/**
+ * Overwrites the default bootstrap style variables
+ * and define other common varaibles.
+ *
+ * Index
+ * - Font Family
+ * - Font Size
+ * - Colors
+ *
+ */
+
+// Font Family
+$body-font: "Source Sans Pro", sans-serif;
+$heading-font: "Viga", sans-serif;
+$secondary-font: "Montserrat", sans-serif;
+
+// Font Size
+$font-xs: 16px;
+$font-sm: 18px;
+$font-md: 20px;
+$font-lg: 24px;
+$font-xl: 32px;
+$font-btn-md: 18px;
+$font-btn-lg: 22px;
+
+// Colors
+$primary: #0079bf;
+$primary-alt: #2090e6;
+$primary-light: #f3faff;
+$secondary: #6d8ea2;
+$info: #172b4d;
+
+$navbar-sidebar-width: 185px;
+$navbar-sidebar-breakpoint: "md";

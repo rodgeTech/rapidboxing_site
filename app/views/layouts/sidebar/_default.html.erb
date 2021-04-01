@@ -1,0 +1,24 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-left">
+  <%= link_to "Rapid Boxing", dashboard_path, class: "navbar-brand mb-3" %>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse">
+    <ul class="navbar-nav" id="top-nav">
+      <li class="nav-item">
+        <%= link_to "Orders", orders_path, class: "nav-link" %>
+      </li>
+    </ul>
+    <ul class="navbar-nav" id="bottom-nav">
+      <li class="nav-item">
+        <%= link_to "Frontpage", root_path, class: "nav-link" %>
+      </li>
+      <li class="nav-item mb-3">
+        <%= link_to "Settings", edit_user_registration_path, class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn bg-white font-weight-bold px-4" %>
+      </li>
+    </ul>
+  </div>
+</nav>

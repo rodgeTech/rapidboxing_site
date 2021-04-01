@@ -1,0 +1,72 @@
+  <!--Carousel Wrapper-->
+<div id="brands-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
+  <!--Controls-->
+  <div class="controls-top">
+    <a class="btn-floating" href="#brands-carousel" data-slide="prev"><i class="fa fa-chevron-left"></i></a>
+    <a class="btn-floating" href="#brands-carousel" data-slide="next"><i class="fa fa-chevron-right"></i></a>
+  </div>
+  <!--/.Controls-->
+  <!--Indicators-->
+  <ol class="carousel-indicators">
+    <li data-target="#brands-carousel" data-slide-to="0" class="active"></li>
+    <li data-target="#brands-carousel" data-slide-to="1"></li>
+  </ol>
+  <!--/.Indicators-->
+  <!--Slides-->
+  <div class="carousel-inner" role="listbox">
+    <!--First slide-->
+    <div class="carousel-item active">
+      <div class="row">
+        <div class="col-md-3">
+          <%= link_to "https://www.amazon.com/", target: "_blank"  do%>
+           <%= image_tag "brands/amazon.jpg", alt: "amazon"%>
+          <% end %>
+        </div>
+        <div class="col-md-3 clearfix d-none d-md-block">
+          <%= link_to "https://www.target.com/", target: "_blank"  do%>
+           <%= image_tag "brands/targetlogo.jpg", alt: "target"%>
+          <% end %>
+        </div>
+        <div class="col-md-3 clearfix d-none d-md-block">
+          <%= link_to "https://www.ebay.com/", target: "_blank"  do%>
+           <%= image_tag "brands/ebay.jpg", alt: "ebay"%>
+          <% end %>
+        </div>
+        <div class="col-md-3 clearfix d-none d-md-block">
+          <%= link_to "https://www.nike.com/", target: "_blank"  do%>
+           <%= image_tag "brands/nike.webp", alt: "nike"%>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <!--/.First slide-->
+    <!--Second slide-->
+    <div class="carousel-item">
+      <div class="row">
+        <div class="col-md-3">
+          <%= link_to "https://www.adidas.com/us", target: "_blank"  do%>
+           <%= image_tag "brands/adidas.jpg", alt: "adidas"%>
+          <% end %>
+        </div>
+        <div class="col-md-3 clearfix d-none d-md-block">
+          <%= link_to "https://www.walmart.com/", target: "_blank"  do%>
+           <%= image_tag "brands/walmart.png", alt: "walmart"%>
+          <% end %>
+        </div>
+        <div class="col-md-3 clearfix d-none d-md-block">
+          <%= link_to "https://www.lg.com/us", target: "_blank"  do%>
+           <%= image_tag "brands/lg.svg", alt: "LG"%>
+          <% end %>
+        </div>
+        <div class="col-md-3 clearfix d-none d-md-block">
+          <%= link_to "https://www.samsung.com/us/", target: "_blank"  do%>
+           <%= image_tag "brands/samsung.jpg", alt: "samsung"%>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <!--/.Second slide-->
+  </div>
+  <!--/.Slides-->
+</div>
+<!--/.Carousel Wrapper-->

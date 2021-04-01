@@ -1,0 +1,4 @@
+<%= content_for(:page_title, 'Order Details') %>
+
+<div id="order-details" data-order-id="<%= params[:id] %>"></div>
+<%= javascript_pack_tag 'orderDetails' %>

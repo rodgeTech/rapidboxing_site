@@ -1,0 +1,31 @@
+.contacts-show {
+  #contact-cta-banner {
+    @include banner(
+      "https://elasticbeanstalk-us-east-1-366162908359.s3.amazonaws.com/rapidboxing/contactus-min.jpg",
+      320px
+    );
+  }
+
+  .main-content {
+    margin-top: 0;
+  }
+
+  #contact-details {
+    padding: 40px 0;
+    background: #fafafa;
+    text-align: center;
+
+    .fas,
+    .far {
+      color: #0079bf;
+    }
+    .info {
+      color: #646464;
+      border-top: 1px solid #f3f3f3;
+      padding-top: 20px;
+      p {
+        margin: 0;
+      }
+    }
+  }
+}

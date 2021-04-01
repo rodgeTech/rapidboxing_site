@@ -1,0 +1,30 @@
+<div class="row mb-5">
+  <div class="col-md-7 mx-auto">
+    <div class="custom-card rounded p-4">
+      <div class="title title-sm mb-4">Legal Settings</div>
+      <%= form_for(Setting.new, url: admin_settings_legal_path) do |f| %>
+        <div class="form-group">
+          <label class="control-label">Refund Policy</label>
+          <%= f.text_area :refund_policy, value: LegalSetting.refund_policy, class: "form-control", rows: "5"  %>
+        </div>
+        <div class="form-group">
+          <label class="control-label">Shipping Policy</label>
+          <%= f.text_area :shipping_policy, value: LegalSetting.shipping_policy, class: "form-control", rows: "5"  %>
+        </div>
+        <div class="form-group">
+          <label class="control-label">Delivery Policy</label>
+          <%= f.text_area :delivery_policy, value: LegalSetting.delivery_policy, class: "form-control", rows: "5"  %>
+        </div>
+        <div class="form-group">
+          <label class="control-label">Privacy Policy</label>
+          <%= f.text_area :privacy_policy, value: LegalSetting.privacy_policy, class: "form-control", rows: "5"  %>
+        </div>
+        <div class="form-group">
+          <label class="control-label">Terms Of Service</label>
+          <%= f.text_area :terms_of_service, value: LegalSetting.terms_of_service, class: "form-control", rows: "5"  %>
+        </div>
+        <%= f.submit "Update", class: "btn btn-primary mt-3 px-5" %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+<div class="<%= current_user.admin? ? '' : 'container' %>">
+  <div class="row mb-5">
+    <div class="<%= current_user.admin? ? 'col-md-6': 'col-md-6 mt-5' %> mx-auto">
+    <div class="custom-card rounded p-3">
+      <div class="title title-sm mb-4 border-bottom pb-3 pt-2">Update your account</div>
+      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+        <%= f.error_notification %>
+        <div class="form-inputs">
+          <%= f.input :name, required: true, autofocus: true %>
+
+          <%= f.input :email, required: true %>
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+          <% end %>
+          <%= f.input :password,
+                hint: "leave it blank if you don't want to change it",
+                required: false,
+                input_html: { autocomplete: "new-password" } %>
+          <%= f.input :password_confirmation,
+                required: false,
+                input_html: { autocomplete: "new-password" } %>
+          <%= f.input :current_password,
+                hint: "we need your current password to confirm your changes",
+                required: true,
+                input_html: { autocomplete: "current-password" } %>
+        </div>
+        <div class="form-actions mb-3">
+          <%= f.button :submit, "Update", class: "btn btn-primary px-5" %>
+        </div>
+      <% end %>
+    <hr/>
+<h5 class="mt-2 title-light mt-3">Danger Zone</h5>
+<p><span class="text-muted"> Unhappy with our service?</span> <%= link_to "Cancel my account", registration_path(resource_name), class: "link text-danger link-danger", data: { confirm: "Are you sure?" }, method: :delete %></p>
+</div>
+</div>
+</div>
+</div>

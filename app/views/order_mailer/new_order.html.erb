@@ -1,0 +1,28 @@
+
+  <h3>Hi RapidBoxing team,</h3>
+  <p>A new order has been placed on your site.</p>
+  <h4 class="mt-2 title">Customer Information: </h4>
+  <table class="content">
+    <tr>
+      <th  colspan="3" style="text-align:left; font-weight: normal;">Name</th>
+      <td><%= @order.name %></td>
+    </tr>
+    <tr>
+      <th colspan="3" style="text-align:left; font-weight: normal;">Email</th>
+      <td><%= @order.email %></td>
+    </tr>
+    <tr>
+      <th colspan="3" style="text-align:left; font-weight: normal;">Number</th>
+      <td><%= @order.contact_number %></td>
+    </tr>
+    <tr>
+      <th colspan="3" style="text-align:left; font-weight: normal;">Address</th>
+      <td><%= @order.address %></td>
+    </tr>
+  </table>
+  <h4>Order Items (<%= @order.order_items.count %>): </h4>
+  <%= render 'application/mailer/order_items'%>
+  <br/>
+  <p class="text-center"><%= link_to "View in dashboard", admin_orders_url, class: "success" %></p>
+
+

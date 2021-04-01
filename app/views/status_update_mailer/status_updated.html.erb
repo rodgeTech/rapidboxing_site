@@ -1,0 +1,14 @@
+<p>Hi <%= @order.name %>,</p>
+<p style="padding-bottom: 20px;">
+  We want you to know that the status of your order for the following <%=  "item".pluralize(@order.order_items.count) %>
+  has changed to <strong><%= @order.status.split('_').collect(&:capitalize).join(' ') %></strong>.
+</p>
+<%= render 'application/mailer/order_items'%>
+<p>
+  Remember you can track the status of your order anytime  
+  by using the tracking number <%= @order.tracking_number %> on the <%= link_to "track my order page", track_order_url, class: "success" %>
+</p>
+<p>Thank you for choosing RapidBoxing.</p>
+<br/>
+<p>Sincerely,</p>
+<p>Your friends at RapidBoxing</p>

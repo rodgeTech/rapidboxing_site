@@ -1,0 +1,27 @@
+<%= content_for(:page_title, 'Orders') %>
+<div class="container">
+  <div class="row mt-4">
+    <div class="col-md-8">
+      <div class="title title-md">Your Orders</div>
+    </div>
+    <div class="col-md-3 ml-auto text-right">
+      <div class="title title-md"><%= @orders.count %></div>
+    </div>
+  </div>
+  <div class="row pt-3">
+    <div class="col-md-12">
+      <% if @orders.present? %>
+        <div class="custom-card rounded p-4">
+          <%= render 'orders' %>
+        </div>
+      <% else %>
+        <h3 class="text-center my-5 pb-3">
+          <span class="bg-white pb-2 border-sm border-bottom border-primary title-light">You have no orders...</span>
+        </h3>
+      <% end %>
+    </div>
+  </div>
+  <div class="mx-auto mt-3">
+    <%= paginate @orders, params: { anchor: 'orders_table' } %>
+  </div>
+</div>

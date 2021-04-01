@@ -1,0 +1,39 @@
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <h4 class="text-info">RapidBoxing</h4>
+        <p class="m-0"><%= GeneralSetting.contact_email %></p>
+        <p class="m-0"><%= GeneralSetting.phone %></p>
+        <p class="m-0"><%= "#{GeneralSetting.city}, #{GeneralSetting.street}" %></p>
+      </div>
+      <div class="col-md-3">
+        <h4 class="text-info">Shop & Ship</h4>
+        <p class="m-0"><%= link_to "Featured", shop_path, class: "link"%></p>
+        <p class="m-0"><%= link_to "Add To Cart", new_line_item_path, class: "link"%></p>
+        <p class="m-0"><%= link_to "Track Order", track_order_path, class: "link"%></p>
+      </div>
+      <div class="col-md-3">
+        <h4 class="text-info">Quick Links</h4>
+        <p class="m-0"><%= link_to "Home", root_path, class: "link"%></p>
+        <% if current_user %>
+          <p class="m-0"><%= link_to "Dashboard", current_user.admin? ? admin_root_path : orders_path, class: "link"%></p>
+          <p class="m-0"><%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "link"%></p>
+        <% else %>
+          <p class="m-0"><%= link_to "Sign In", new_user_session_path, class: "link"%></p>
+          <p class="m-0"><%= link_to "Register", new_user_registration_path, class: "link"%></p>
+        <% end %>
+      </div>
+      <div class="col-md-3">
+        <h4 class="text-info">About Us</h4>
+        <p class="m-0"><%= link_to "About Us", about_path, class: "link"%></p>
+        <p class="m-0"><%= link_to "Payment Details", payment_details_path, class: "link"%></p>
+        <p class="m-0"><%= link_to "Terms of Service", terms_service_path, class: "link"%></p>
+      </div>
+    </div>
+  </div>
+  <section>
+    <p class="m-0 copyright"> &copy; 2019-<%= Time.current.year %> RapidBoxing. All rights reserved.</p>
+    <p class="m-0 text-info title-light" style="font-size: 16px; padding-top: 6px;"> Developed by <a href="https://www.mybelizecommerce.com/" target="_blank" class="link text-info">mybelizecommerce.com</a><p>
+  </section>
+</footer>

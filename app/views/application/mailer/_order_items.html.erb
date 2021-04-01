@@ -1,0 +1,18 @@
+<% @order.order_items.each do |order_item| %>
+  <table class="mail-new-order-items">
+    <tr>
+      <th style="vertical-align: top; text-align:left; font-weight: normal;">Id</th>
+      <td><%= order_item.id %></td>
+    </tr>
+    <tr>
+      <th style="vertical-align: top; text-align:left; font-weight: normal;">Link</th>
+      <td>
+        <%= link_to order_item.link, order_item.link %>
+      </td>
+    </tr>
+    <tr>
+      <th style="vertical-align: top; text-align:left; font-weight: normal;">Qty</th>
+      <td><%= order_item.quantity %></td>
+    </tr>
+  </table>
+<% end %>

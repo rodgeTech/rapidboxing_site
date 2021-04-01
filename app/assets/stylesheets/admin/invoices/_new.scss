@@ -1,0 +1,35 @@
+.admin-invoices-new {
+  th {
+    border-color: #f0f0f0;
+  }
+  td {
+    border-color: #f0f0f0;
+  }
+  .item {
+    border-top: 1px solid #f0f0f0;
+    padding: 14px 0;
+    &:first-of-type {
+      border: 0;
+    }
+  }
+  .price-item {
+    border-top: 1px dotted #ccc;
+    padding: 20px 0;
+    &:first-of-type {
+      border: 0;
+    }
+    &:first-of-type {
+      padding-top: 0;
+    }
+  }
+  .invoice-balance {
+    border-top: 1px solid #ccc!important;
+    border-bottom: 1px solid #ccc!important;
+    padding: 20px 0;
+  }
+
+  option[selected] {
+    border: 1px solid $success!important;
+  }
+
+}

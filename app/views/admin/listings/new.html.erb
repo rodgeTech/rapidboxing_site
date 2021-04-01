@@ -1,0 +1,22 @@
+<%= content_for(:page_title, 'New Listing') %>
+<div class="row">
+  <div class="col-md-7 mx-auto">
+    <div class="card p-4 mb-5">
+      <div class="title title-md mb-4">New Listing</div>
+      <%= simple_form_for [:admin, @listing], validate: true do |f| %>
+        <%= f.input :title %>
+        <%= f.input :price %>
+        <% if ShippingSetting.rate_method === 'weight' %>
+          <%= f.association :shipping_rate, collection: WeightShippingRate.all, include_blank: false %>
+        <% elsif ShippingSetting.rate_method === 'price'  %>
+          <%= f.association :shipping_rate, collection: PriceShippingRate.all, include_blank: false %>
+        <% end %>
+        <%= f.input :description %>
+        <%= f.input :requirements, hint: 'Information required from users upon ordering (size, color, etc)' %>
+        <%= f.input :link %>
+        <%= f.input :images, as: :file, input_html: {multiple: true} %>
+        <%= f.button :submit, class: "btn btn-primary btn-md px-5 my-3" %>
+      <% end %>
+    </div>
+  </div>
+</div>

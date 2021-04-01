@@ -1,0 +1,23 @@
+.pages-shop {
+  #shop-cta-banner {
+    @include banner(
+      "https://elasticbeanstalk-us-east-1-366162908359.s3.amazonaws.com/rapidboxing/shopcover.jpg",
+      400px
+    );
+    border-bottom: 8px solid #f1f1f1;
+  }
+
+  .main-content {
+    margin-top: 0;
+  }
+
+  #featured {
+    margin-bottom: 90px;
+  }
+
+  .card {
+    .footer {
+      background: #f3faff;
+    }
+  }
+}

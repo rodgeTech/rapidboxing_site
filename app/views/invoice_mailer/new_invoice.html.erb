@@ -1,0 +1,14 @@
+<div style="font-size: 16px;">
+  <p>Hi <%= @invoice.order.name  %>,</p>
+  <p>
+    Please find attached your order invoice. Please note that an initial deposit of <strong><%= humanized_money_with_symbol(@order.initial_deposit) %></strong>
+    is required to confirm and process this order. 
+  </p>
+
+  <p>You can find the total breakdown and banking details within the attached invoice.</p>
+
+  <p>Thanks for choosing RapidBoxing!</p>
+  <br/>
+  <p>Sincerely,</p>
+  <p>Your friends at RapidBoxing</p>
+</div>

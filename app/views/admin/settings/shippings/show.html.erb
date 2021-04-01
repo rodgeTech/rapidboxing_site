@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="col-md-7 mx-auto mb-5">
+    <div class="custom-card rounded p-4">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="title title-sm">Weight Shipping Rates</div>
+        </div>
+        <div class="col-md-4 text-right">
+          <%= link_to "Add Rate", new_admin_settings_weight_shipping_rate_path, class: "btn btn-primary px-4"%>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-12">
+          <table class="table table-striped font-size-xs">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Range</th>
+                <th scope="col">Rate Amount</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @weight_shipping_rates.each do |rate| %>
+                <tr>
+                  <td><%= rate.name %></td>
+                  <td><%= "#{rate.min_order_weight} lb - #{rate.max_order_weight} lb" %></td>
+                  <td><%= rate.free_shipping? ? "Free" : rate.rate_amount.format %></td>
+                  <td>
+                    <%= link_to edit_admin_settings_weight_shipping_rate_path(rate), class: "link text-secondary mr-2" do %>
+                      <i class="far fa-edit"></i>
+                    <% end %>
+                    <%= link_to admin_settings_weight_shipping_rate_path(rate), method: :delete, class: "link text-secondary " do %>
+                      <i class="far fa-trash-alt"></i>
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

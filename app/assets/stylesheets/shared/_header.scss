@@ -1,0 +1,44 @@
+// Header
+.navbar {
+  background: $primary;
+  font-family: $secondary-font;
+
+  .navbar-brand {
+    font-size: 1.4rem;
+    font-family: $heading-font;
+  }
+
+  .navbar-logo {
+    width: 48px;
+    margin-right: 8px;
+  }
+
+  .btn-primary {
+    background: #0088bf;
+  }
+
+  .navbar-nav {
+    .bg-white {
+      color: #0079bf;
+    }
+  }
+}
+
+.navbar .navbar-expand-md .navbar-dark {
+  background: #fff;
+}
+
+@media only screen and (max-width: 768px) {
+  #navbarCollapse {
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.76);
+    border-radius: 10px;
+    padding-top: 25px;
+    padding-bottom: 45px;
+    #mainNavActions {
+      .btn {
+        width: 50%;
+      }
+    }
+  }
+}

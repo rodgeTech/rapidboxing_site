@@ -1,0 +1,25 @@
+<%= content_for(:page_title, 'Edit Line Item') %>
+<div class="container my-5">
+  <div class="row">
+    <div class="col-md-5">
+      <%= image_tag @listing.images.first.image_url, class: "img-fluid" %>
+      <div class="text-center mt-4">
+        <%= link_to "View on provider site", @listing.link, target: :_blank, class: "btn btn-secondary"%>
+      </div>
+    </div>
+    <div class="col-md-5 ml-auto">
+      <div class="title title-md mb-3">Edit: <%= @listing.title %></div>
+      <%= simple_form_for @line_item, validate: true do |f| %>
+        <% if @listing.requirements %>
+          <p class="text-info">Requirements:</p>
+          <%= @listing.requirements %>
+          <hr/>
+        <% end %>
+        <%= f.input :details, label: "Requirement Details", hint: "Order details such as size, color, etc (depends on the type of item)." %>
+        <%= f.input :quantity %>
+        <%= f.input :listing_id, as: :hidden, :input_html => { :value => @listing.id }%>
+        <%= f.button :submit, "Update", class: "btn btn-primary btn-md btn-block mb-3" %>
+      <% end %>
+    </div>
+  </div>
+</div>

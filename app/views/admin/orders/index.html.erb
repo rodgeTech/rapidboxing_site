@@ -1,0 +1,72 @@
+<%= content_for(:page_title, 'Catalog') %>
+<div class="mb-5">
+  <div class="row mb-3">
+    <div class="col-md-8">
+      <div class="title title-md">Manage Orders <span class="title-light ml-3"><%= Order.active.unarchived.count %></span></div>
+      <p>Create invoices, receipts, update order statuses, etc.</p>
+    </div>
+    <div class="col-md-3 ml-auto text-sm-right">
+      <%= link_to "Archived Orders", admin_orders_archives_path, class: "btn btn-md btn btn-light px-4"%>
+    </div>
+  </div>
+  <% if @orders.any? || params[:query].present? || params[:status].present?  %>
+    <div class="custom-card rounded p-4 mb-4">
+      <div class="mb-4">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="dropdown">
+                  <button class="btn bg-white border dropdown-toggle btn-block" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <%= params[:status].present? ? params[:status].titleize : "Status" %>
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <% Order.statuses.keys.each do |status| %>
+                      <%= link_to order_status(status), current_page_params.merge(status: status), class: 'dropdown-item'%>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="dropdown">
+                  <button class="btn bg-white border dropdown-toggle btn-block" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <%= params[:date].present? ? "Date #{params[:date].titleize}" : "Sort By" %>
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <% if params[:date] == 'asc' %>
+                      <%= link_to "Date Created", current_page_params.merge(date: :desc), class: 'dropdown-item'%>
+                    <% else %>
+                      <%= link_to "Date Created", current_page_params.merge(date: :asc), class: 'dropdown-item'%>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 pt-1">
+                <% if params[:status].present? || params[:date].present? %>
+                  <%= link_to "Reset", admin_orders_path, class: "link text-secondary" %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 ml-auto pt-3 pt-sm-0">
+            <%= form_tag admin_orders_path, method: :get, class: "input-group input-group-transparent" do %>
+              <%= text_field_tag :query, params[:query], class: "form-control form-control-md border rounded-left",
+                          placeholder: "Search for orders" %>
+              <div class="input-group-append">
+                <button type="submit" class="btn btn-primary my-sm-0">
+                  <i class="fas fa-search mr-2"></i> Search
+                </button>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <%= render 'orders' %>
+    </div>
+    <%= paginate @orders, :params => { :anchor => 'orders_table' } %>
+  <% else %>
+    <div class="text-center pt-5 border-top">
+      <h3 class="title-light">No orders yet...</h3>
+    </div>
+  <% end %>
+</div>

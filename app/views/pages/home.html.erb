@@ -1,0 +1,169 @@
+<%= content_for(:page_title, 'Home') %>
+<% if @slides.any? %>
+  <div style="position: relative; height: 100vh;">
+    <%= render 'slider' %>
+  </div>
+<% end %>
+<section id="hero">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6">
+        <h1 class="title">Never lose <span class="text-info">track</span> of your shipment</h1>
+        <p class="lead">We make it easy for you to track an order even if you don't have an account. Give it a try today!</p>
+        <%= link_to "Track Shipment", track_order_path, class: "btn btn-success btn-lg mt-3"%>
+      </div>
+      <div class="col-lg-5 offset-lg-1 mt-5 mt-sm-0">
+        <div id="shipment-date">
+          <div class="title title-md text-info">Next shipment leaving on</div>
+          <% if Schedule.upcoming.any? %>
+            <h3><%= Schedule.upcoming.first.departure.strftime('%A, %b %o') %></h3>
+          <% else %>
+            <h3>Coming soon</h3>
+          <% end %>
+          <%= link_to "Order Today!", new_line_item_path, class: "btn btn-primary text-white bg-primary-alt border-0 btn-lg mt-3 mb-1 px-4"%>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="mobile-app">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-7">
+        <%= image_tag "app/appscreens.jpg", class: "img-fluid" %>
+      </div>
+      <div class="col-md-5 pl-5">
+        <div class="title title-lg mt-5 pt-4">Download Our App</div>
+        <p class="text-muted pt-4">
+          Experience the full power of rapidboxing.com from the convenience of your android and ios devices. Immerse
+          yourself in a truly modern shopping experience.
+        </p>
+        <h6 class="pt-3 pb-2 title-light">Coming soon to the Apple App Store.</h6>
+        <div class="row mt-4">
+          <div class="col-md-6 col-sm-2 col-xs-2">
+            <a href="https://play.google.com/store/apps/details?id=com.rapidboxing&hl=en">
+              <%= image_tag "app/googleplay.png", style: 'width: 180px' %>
+            </a>
+          </div>
+         
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<section id="services">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col text-center">
+        <div class="title title-lg">Our Key Features</div>
+        <p class="text-muted lead">Interested in knowing what we can do for you? Then here's a glimpse of just that...</p>
+      </div>
+    </div>
+    <div class="row mt-5">
+      <div class="col-md-4 mb-4 mb-sm-0">
+        <%= image_tag "orderonline.jpg", class: "img-md-eh mb-3" %>
+
+        <span class="imagebox-desc title-light"><strong>100% Online ordering</strong></span>
+        <p class="font-size-sm pt-2 text-muted">
+          We offer two methods of ordering, manually submitting your 
+          item link or selecting from one of our handpicked items.
+        </p>
+        <%= link_to "Submit Order", new_line_item_path, class: "btn btn-primary" %>
+      </div>
+      <div class="col-md-4 mb-4 mb-sm-0">
+        <%= image_tag "trackorder.jpg", class: "img-md-eh mb-3" %>
+
+        <span class="imagebox-desc title-light"><strong>Order Tracking</strong></span>
+        <p class="font-size-sm pt-2 text-muted">
+          Easily keep track of your order from the moment you place it to 
+          when it's being delivered to your location. 
+        </p>
+        <%= link_to "Track Order", track_order_path, class: "btn btn-primary" %>
+      </div>
+      <div class="col-md-4">
+        <%= image_tag "mobilehome.jpg", class: "img-md-eh mb-3" %>
+
+        <span class="imagebox-desc title-light"><strong>Mobile Experience</strong></span>
+        <p class="font-size-sm pt-2 text-muted">
+          With our app you'll have easier access to all of our features from your iOS and Android devices .
+        </p>
+        <a href="https://play.google.com/store/apps/details?id=com.rapidboxing&hl=en">
+           <%= image_tag "app/googleplay.png", style: "width: 150px"%>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="stores">
+  <div class="container">
+    <div class="inner-content">
+      <div class="row">
+        <div class="col text-center">
+          <div class="title title-lg">Shop From Top Brands</div>
+          <p class="lead">With us you can shop from the best companies just like these and much much more</p>
+        </div>
+      </div>
+      <div class="row mt-4 text-center">
+        <div class="col-md-12 ">
+          <%= render 'carousel' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<% if @recommended.any? %>
+  <section id="recent-orders">
+    <div class="container">
+      <div class="row mb-5">
+        <div class="col text-center">
+          <div class="title title-lg">Recommendations</div>
+          <p class="lead text-muted">Here are a few trending items we think you might like</p>
+          <%= link_to shop_path, class: "btn btn-md bg-white border text-primary px-4" do %>
+            View more in catalog 
+          <% end %>
+        </div>
+      </div>
+      <div class="row">
+        <% @recommended.each do |listing| %>
+          <div class="col-md-4 col-sm-4 col-6 mb-4">
+            <div>
+              <% if listing.images.any? %>
+                <%= image_tag listing.images.first.image_url(:medium), class: "card-img-top img-md-eh" %>
+              <% end %>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-12">
+                    <h5 class="title text-dark text-truncate"><%= listing.title %></h5>
+                  </div>
+                </div>
+              </div>
+              <div class="p-3 bg-light footer">
+              <div class="row">
+                <div class="col-md-8">
+                  <%= link_to "Order", new_listing_line_item_path(listing), class: "btn bg-white border px-4" %>
+                </div>
+                <div class="col-md-4 text-md-right pt-2 pt-sm-0">
+                  <h4 class="text-success m-0 title"><%= humanized_money_with_symbol(listing.price) %></h4>
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </section>
+<% end %>
+<section id="home-cta-banner">
+  <div class="banner-content">
+    <div class="banner-header">
+      <span class="title title-lg text-white">Shop With Us Today</span>
+    </div>
+    <div class="banner-body">
+      <p class="lead text-white">Give us try today. You can sign up or simply shop as a guest.</p>
+    </div>
+    <div class="banner-footer">
+      <%= link_to "Shop Today", new_line_item_path,  class: "btn btn-lg bg-white font-weight-bold px-4" %>
+    </div>
+  </div>
+</section>

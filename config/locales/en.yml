@@ -1,0 +1,20 @@
+en:
+  notifications:
+    pending:
+      title: "Your order is pending"
+      message: "Awaiting first deposit to process order"
+    confirmed:
+      title: "Your order is confirmed"
+      message: "First deposit received, order is now being processed"
+    order_arrived:
+      title: "We've received your order"
+      message: "Order has arrived at our warehouse and is awaiting shipment"
+    being_shipped:
+      title: "Your order is being shipped"
+      message: "Order has departed from our US warehouse"
+    arrived:
+      title: "Your order has arrived"
+      message: "Order has arrived to our Belize warehouse"
+    out_for_delivery:
+      title: "Your order is on its way"
+      message: "Order has been dispatched to your location"
