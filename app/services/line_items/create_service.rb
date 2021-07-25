@@ -12,6 +12,7 @@ module LineItems
     end
 
     def create_line_item
+      byebug
       line_item = @cart.line_items.find_by_link(@params[:link])
 
       if line_item
@@ -20,10 +21,17 @@ module LineItems
       else
         line_item = @cart.line_items.new(@params)
         if line_item.save!
+          save_images(line_item) if @params[:images]
           Result.new(record: line_item, success: true)
         else
           Result.new(record: line_item, success: false)
         end
+      end
+    end
+
+    def save_images(line_item)
+      @params[:images].each do |image|
+        line_item.images.create!(image: image)
       end
     end
   end

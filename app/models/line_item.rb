@@ -5,6 +5,8 @@ class LineItem < ApplicationRecord
 
   belongs_to :listing, optional: true
   belongs_to :cart
+  has_many :images, as: :imageable, dependent: :destroy
+
 
   validates :quantity, :link, presence: true
   validates :price, presence: true, format: { with: /\A\d+(?:\.\d{2})?\z/ },

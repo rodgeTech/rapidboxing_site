@@ -18,6 +18,7 @@ module Api
       end
 
       def create
+        byebug
         result = LineItems::CreateService.call(
           cart: @cart,
           params: line_item_params
@@ -42,7 +43,7 @@ module Api
 
       def line_item_params
         params.permit(:details, :quantity, :link, :shipping_rate_id,
-                      :price, :listing_id, :extra_pounds, :local_pickup)
+                      :price, :listing_id, :extra_pounds, :local_pickup, :images)
       end
 
       def line_item
