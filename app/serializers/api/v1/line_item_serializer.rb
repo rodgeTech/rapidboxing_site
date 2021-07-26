@@ -7,6 +7,8 @@ class Api::V1::LineItemSerializer
 
   attributes :id, :link, :quantity, :details, :price
 
+  has_many :images
+
   attribute :price do |object|
     object.price.to_f
   end

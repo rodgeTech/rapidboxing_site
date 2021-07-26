@@ -7,7 +7,7 @@ module Api
 
       # skip_before_action :authenticate_user!
       before_action :set_current_user_cart
-      before_action :line_item, only: :destroy
+      before_action :line_item, only: [:show, :destroy]
 
       def index
         options = {}
@@ -17,8 +17,14 @@ module Api
         render json: LineItemSerializer.new(line_items, options).serialized_json
       end
 
+      def show
+        options = {}
+        options[:include] = [:images]
+        # options[:is_collection] = false
+        render json: LineItemSerializer.new(@line_item, options).serialized_json
+      end
+
       def create
-        byebug
         result = LineItems::CreateService.call(
           cart: @cart,
           params: line_item_params,

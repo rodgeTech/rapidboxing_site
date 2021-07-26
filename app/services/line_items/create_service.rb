@@ -13,7 +13,6 @@ module LineItems
     end
 
     def create_line_item
-      byebug
       line_item = @cart.line_items.find_by_link(@params[:link])
 
       if line_item
@@ -31,7 +30,6 @@ module LineItems
     end
 
     def save_images(line_item)
-      byebug
       @images.each do |image|
         line_item.images.create!(image: image)
       end
