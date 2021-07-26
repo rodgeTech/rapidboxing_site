@@ -21,7 +21,8 @@ module Api
         byebug
         result = LineItems::CreateService.call(
           cart: @cart,
-          params: line_item_params
+          params: line_item_params,
+          images: params[:images]
         )
         if result.success?
           render json: { message: 'Line item successfully created' },
@@ -43,7 +44,7 @@ module Api
 
       def line_item_params
         params.permit(:details, :quantity, :link, :shipping_rate_id,
-                      :price, :listing_id, :extra_pounds, :local_pickup, :images)
+                      :price, :listing_id, :extra_pounds, :local_pickup)
       end
 
       def line_item

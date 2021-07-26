@@ -2,9 +2,10 @@
 
 module LineItems
   class CreateService < BaseService
-    def initialize(cart:, params:)
+    def initialize(cart:, params:, images:)
       @cart = cart
       @params = params
+      @images = images
     end
 
     def call
@@ -21,7 +22,7 @@ module LineItems
       else
         line_item = @cart.line_items.new(@params)
         if line_item.save!
-          save_images(line_item) if @params[:images]
+          save_images(line_item) unless @images.nil?
           Result.new(record: line_item, success: true)
         else
           Result.new(record: line_item, success: false)
@@ -30,7 +31,8 @@ module LineItems
     end
 
     def save_images(line_item)
-      @params[:images].each do |image|
+      byebug
+      @images.each do |image|
         line_item.images.create!(image: image)
       end
     end
