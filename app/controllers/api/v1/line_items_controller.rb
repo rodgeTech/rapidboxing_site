@@ -43,7 +43,7 @@ module Api
 
       def update
         if @line_item.update_attributes(line_item_params)
-          update_images
+          update_images if params[:images]
           render json: { message: 'Line item successfully updated' },
                  status: :ok
         else
@@ -69,11 +69,8 @@ module Api
       end
 
       def update_images
-        @line_item.images.destroy_all
-        if params[:images]
-          params[:images].each do |image|
-            @line_item.images.create!(image: image)
-          end
+        params[:images].each do |image|
+          @line_item.images.create!(image: image)
         end
       end
     end
