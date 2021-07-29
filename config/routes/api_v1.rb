@@ -17,7 +17,7 @@ namespace :api do
     resource :calculator, only: :show
     resources :contacts, only: :create
     resources :images, only: :destroy
-    resources :order_items, only: :update
+    resources :order_items, only: [:update, :show]
     get 'track_order/:id', to: 'orders#track_order'
     resources :invoices, only: :create
     resources :deposits, only: %i[create destroy]
