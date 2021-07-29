@@ -5,4 +5,5 @@ class OrderItem < ApplicationRecord
 
   belongs_to :order
   has_one :invoice_item, dependent: :destroy
+  has_many :images, as: :imageable, dependent: :destroy
 end
