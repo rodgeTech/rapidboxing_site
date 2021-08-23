@@ -8,7 +8,7 @@ module Api
 
       def show
         options = {}
-        options[:include] = [:line_items]
+        options[:include] = [:line_items, 'line_items.images']
         options[:is_collection] = false
         render json: CartSerializer.new(@cart, options).serialized_json
       end

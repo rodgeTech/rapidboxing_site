@@ -4,7 +4,13 @@ module Api
   module V1
     class OrderItemsController < BaseController
       skip_before_action :authenticate_user!
-      before_action :order_item, only: :update
+      before_action :order_item, only: [:show, :update]
+
+      def show
+        options = {}
+        options[:include] = [:images]
+        render json: OrderItemSerializer.new(@order_item, options).serialized_json
+      end
 
       def update
         if @order_item.update_attributes(order_item_params)

@@ -7,7 +7,7 @@ module Api
 
       # skip_before_action :authenticate_user!
       before_action :set_current_user_cart
-      before_action :line_item, only: :destroy
+      before_action :line_item, only: [:show, :update, :destroy]
 
       def index
         options = {}
@@ -17,10 +17,18 @@ module Api
         render json: LineItemSerializer.new(line_items, options).serialized_json
       end
 
+      def show
+        options = {}
+        options[:include] = [:images]
+        # options[:is_collection] = false
+        render json: LineItemSerializer.new(@line_item, options).serialized_json
+      end
+
       def create
         result = LineItems::CreateService.call(
           cart: @cart,
-          params: line_item_params
+          params: line_item_params,
+          images: params[:images]
         )
         if result.success?
           render json: { message: 'Line item successfully created' },
@@ -30,6 +38,17 @@ module Api
           render json: { errors: result.record.errors.full_messages },
                  status: :unprocessable_entity
 
+        end
+      end
+
+      def update
+        if @line_item.update_attributes(line_item_params)
+          update_images if params[:images]
+          render json: { message: 'Line item successfully updated' },
+                 status: :ok
+        else
+          render json: { errors: @line_item.errors.full_messages },
+                 status: :unprocessable_entity
         end
       end
 
@@ -47,6 +66,12 @@ module Api
 
       def line_item
         @line_item ||= LineItem.find(params[:id])
+      end
+
+      def update_images
+        params[:images].each do |image|
+          @line_item.images.create!(image: image)
+        end
       end
     end
   end

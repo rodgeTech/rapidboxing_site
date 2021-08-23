@@ -9,6 +9,7 @@ class Api::V1::OrderItemSerializer
              :local_pickup
 
   belongs_to :shipping_rate
+  has_many :images
 
   attribute :price do |object|
     object.price.to_f.round(2)

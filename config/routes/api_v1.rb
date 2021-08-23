@@ -11,13 +11,13 @@ namespace :api do
                                 }
 
     resources :listings, only: %i[show index]
-    resources :line_items, only: %i[index create destroy]
+    resources :line_items
     resources :users, only: :index
     resource :profile, only: :show
     resource :calculator, only: :show
     resources :contacts, only: :create
-
-    resources :order_items, only: :update
+    resources :images, only: :destroy
+    resources :order_items, only: [:update, :show]
     get 'track_order/:id', to: 'orders#track_order'
     resources :invoices, only: :create
     resources :deposits, only: %i[create destroy]
